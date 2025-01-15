@@ -40,7 +40,7 @@ hstack_t stack_new(void)
         }
         else
         {
-            for( int i = 0; i < SizeOfTable; ++i)
+            for( unsigned int i = 0; i < SizeOfTable; ++i)
             {
                 stackTable[i].stackEn = false;
                 stackTable[i].numElem = 0;
@@ -50,7 +50,7 @@ hstack_t stack_new(void)
     }
 
     // Ищем невыделенный заголовок под стек
-    for( int i = 0; i < SizeOfTable; ++i )
+    for( unsigned int i = 0; i < SizeOfTable; ++i )
     {
         if( stackTable[i].stackEn == false ) 
         {
@@ -72,7 +72,7 @@ hstack_t stack_new(void)
     {
         stackTable = stackTmp;
 
-        for( int i = SizeOfTable_old; i < SizeOfTable; ++i)
+        for( unsigned int i = SizeOfTable_old; i < SizeOfTable; ++i)
         {
             stackTable[i].stackEn = false;
             stackTable[i].numElem = 0;
@@ -89,7 +89,7 @@ hstack_t stack_new(void)
 void stack_free(const hstack_t hstack)
 {
     if( stackTable == NULL ) { return; }
-    if( hstack < 0 || hstack > SizeOfTable ) { return; }
+    if( hstack < 0 || hstack > (int)SizeOfTable ) { return; }
     if( stackTable[hstack].stackEn == false ) { return; }
 
     if( stackTable[hstack].numElem != 0 )
@@ -113,7 +113,7 @@ void stack_free(const hstack_t hstack)
 int stack_valid_handler(const hstack_t hstack)
 {
     if( stackTable == NULL ) { return 1; }
-    if( hstack < 0 || hstack > SizeOfTable ) { return 1; }
+    if( hstack < 0 || hstack > (int)SizeOfTable ) { return 1; }
     if( stackTable[hstack].stackEn == false ) { return 1; }
 
     return 0;
@@ -125,7 +125,7 @@ int stack_valid_handler(const hstack_t hstack)
 unsigned int stack_size(const hstack_t hstack)
 {
     if( stackTable == NULL ) { return 0; }
-    if( hstack < 0 || hstack > SizeOfTable ) { return 0; }
+    if( hstack < 0 || hstack > (int)SizeOfTable ) { return 0; }
     if( stackTable[hstack].stackEn == false ) { return 0; }
 
     return stackTable[hstack].numElem;
@@ -137,7 +137,7 @@ unsigned int stack_size(const hstack_t hstack)
 void stack_push(const hstack_t hstack, const void* data_in, const unsigned int size)
 {
     if( stackTable == NULL ) { return; }
-    if( hstack < 0 || hstack > SizeOfTable ) { return; }
+    if( hstack < 0 || hstack > (int)SizeOfTable ) { return; }
     if( stackTable[hstack].stackEn == false ) { return; }
 
     if( data_in == NULL || size == 0 ) { return; }
@@ -169,7 +169,7 @@ void stack_push(const hstack_t hstack, const void* data_in, const unsigned int s
 unsigned int stack_pop(const hstack_t hstack, void* data_out, const unsigned int size)
 {
     if( stackTable == NULL ) { return 0; }
-    if( hstack < 0 || hstack > SizeOfTable ) { return 0; }
+    if( hstack < 0 || hstack > (int)SizeOfTable ) { return 0; }
     if( stackTable[hstack].stackEn == false ) { return 0; }
 
     if( data_out == NULL || size == 0 ) { return 0; }
